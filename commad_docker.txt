@@ -1,0 +1,32 @@
+<==== Get images list 
+
+#All images
+docker images
+
+#All active container list
+docker ps
+
+#All inactive / active container list 
+docker ps -a
+
+<==== Get images 
+
+# All image delete
+docker rmi $(docker images -q)  
+
+docker rm 3b0ed4131cda -f
+
+docker rm $(docker ps -aq) -f 
+
+
+docker build -t testblog 
+
+
+docker network ls
+
+docker network inspect testblog_testblog
+
+
+
+===> Exeicute in container
+docker exec -it testblog-php-1 bash

@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  php:
+    build: "./php"
+    ports:
+      - 9000:9000
+    networks:
+      - testblog
+    volumes:
+      - .:/src
+
+
+  nginx:
+    build: "./nginx"
+    ports:
+      - 8000:80
+    volumes:
+      - .:/src
+    networks:
+      - testblog
+  
+  mysql:
+    image: mysql:8.0
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: testblog
+      MYSQL_PASSWORD: password
+    networks:
+      - testblog
+    volumes:
+      - mysqlvol:/var/lib/mysql
+
+networks:
+  testblog:
+    driver: bridge
+
+volumes:
+  mysqlvol:
+    driver: local

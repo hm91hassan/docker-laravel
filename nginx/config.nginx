@@ -1,0 +1,22 @@
+
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	root /src/site/public;
+
+	index index.php index.html index.htm index.nginx-debian.html;
+
+	server_name _;
+
+	location / {
+		try_files $uri $uri/ /index.php?$query_string;
+	}
+
+
+	location ~ \.php$ {
+		include snippets/fastcgi-php.conf;
+		fastcgi_pass testblog-php-1:9000;
+	}
+
+}
